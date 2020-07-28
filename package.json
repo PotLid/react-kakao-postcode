@@ -1,0 +1,39 @@
+{
+  "name": "react-kakao-postcode",
+  "version": "1.0.0",
+  "description": "react-kakao-postcode",
+  "main": "dist/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react": "^16.9.43",
+    "@types/react-dom": "^16.9.8",
+    "babel-core": "^6.26.3",
+    "babel-runtime": "^6.26.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rollup": "^2.23.0",
+    "rollup-plugin-sass": "^1.2.2",
+    "rollup-plugin-typescript2": "^0.27.1",
+    "typescript": "^3.9.7"
+  },
+  "peerDependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PotLid/react-kakao-postcode.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PotLid/react-kakao-postcode/issues"
+  },
+  "homepage": "https://github.com/PotLid/react-kakao-postcode#readme"
+}
