@@ -1,28 +1,33 @@
-react-kakao-postcode
+# React-Kakao-Postcode
 
-Original API source: http://postcode.map.daum.net/guide
+### Installation
 
-LICENSE: MIT License
+React-Kakao-Postcode requires React ^16.13.1 and React-Dom ^16.13.1
 
-Current Version: 1.0.0
+```sh
+$ npm install react-kakao-postcode
+```
 
-Future Plannings
+Or for those who use Yarn instead of npm
 
-- fully support original API's features
+```sh
+$ yarn add react-kakao-postcode
+```
 
-- complete documentation
+#### Original API (Daum Postcode API)
 
-Usage
+See [DaumPostcode](http://postcode.map.daum.net/guide#usage)
 
-<ReactKakaoPostcode> props
 
-onChange: (data) => return data
+### Todos
 
-className: string
+ - Polish whole package strucutre
+ - Refine Readme and future DOC
+ - Fully support features of original daum postcode service
+ - Tune performance and code base
 
-scriptId: string (Default: 'kakao-script')
+License
+----
 
-optioins: {
-    removeScript: Boolean (Default: true)
-    callback: Function
-}
+MIT ©PotLId
+
