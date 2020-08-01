@@ -44,4 +44,4 @@ onChange: function(data:Object) => data:Object
 License
 ----
 
-MIT ©PotLId
+MIT ©PotLId 2020
