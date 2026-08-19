@@ -34,7 +34,9 @@
     "start": "rollup -c -w",
     "prepublishOnly": "npm run build",
     "build:e2e": "esbuild e2e/harness.tsx --bundle --outfile=e2e/dist/harness.js --loader:.scss=empty",
-    "test:e2e": "npm run build:e2e && playwright test"
+    "test:e2e": "npm run build:e2e && playwright test",
+    "demo:dev": "npm --prefix demo run dev",
+    "demo:build": "npm --prefix demo run build"
   },
   "repository": {
     "type": "git",
