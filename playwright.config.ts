@@ -3,7 +3,7 @@ import { defineConfig } from '@playwright/test'
 export default defineConfig({
     testDir: './e2e',
     fullyParallel: true,
-    reporter: 'list',
+    reporter: process.env.CI ? 'github' : 'list',
     use: {
         baseURL: 'http://localhost:4321',
     },
