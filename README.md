@@ -2,6 +2,8 @@
 
 A React wrapper around the Daum/Kakao Postcode widget for searching Korean addresses and postal codes.
 
+**[Live demo & full docs →](https://potlid.github.io/react-kakao-postcode/)**
+
 ### Installation
 
 React-Kakao-Postcode requires React >=16.8.0 (hooks support) and React-Dom >=16.8.0
@@ -107,6 +109,8 @@ MIT ©PotLid
 ## 한국어 문서
 
 Daum/Kakao 우편번호(주소 검색) 위젯을 감싼 React 컴포넌트입니다. [postcode.map.kakao.com/guide#usage](https://postcode.map.kakao.com/guide#usage)에 문서화된 옵션·콜백·메서드를 빠짐없이 지원합니다.
+
+**[라이브 데모 및 전체 문서 →](https://potlid.github.io/react-kakao-postcode/)**
 
 ### 설치
 
