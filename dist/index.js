@@ -99,7 +99,7 @@ function insertStyle(css) {
 insertStyle(".wrap {\n  box-sizing: border-box;\n}");
 
 var useState = React__namespace.useState, useRef = React__namespace.useRef, forwardRef = React__namespace.forwardRef, useImperativeHandle = React__namespace.useImperativeHandle;
-var KAKAO_API = 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
+var KAKAO_API = 'https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
 var EMBED_DEFAULTS = {
     width: '100%',
     height: '100%',
@@ -137,6 +137,8 @@ var ReactKakaoPostcode = forwardRef(function (_a, ref) {
             alert('다음 우편번호 서비스에 문제가 있습니다. 다시 시도해 주세요.');
             return;
         }
+        if (mode === 'embed' && visible)
+            return;
         var currentScroll = window.scrollY;
         var postcode = createPostcode(currentScroll);
         if (mode === 'popup') {
@@ -148,6 +150,9 @@ var ReactKakaoPostcode = forwardRef(function (_a, ref) {
     }
     function closePostcode() {
         setVisible(false);
+        if (mode === 'embed' && postcodeArea.current) {
+            postcodeArea.current.innerHTML = '';
+        }
     }
     useImperativeHandle(ref, function () { return ({
         open: openPostcode,

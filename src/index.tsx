@@ -4,7 +4,7 @@ import './styles.scss'
 
 const {useState, useRef, forwardRef, useImperativeHandle} = React;
 
-const KAKAO_API: string = 'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'
+const KAKAO_API: string = 'https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'
 
 export type PostcodeAddressType = 'R' | 'J'
 export type PostcodeYN = 'Y' | 'N'
@@ -145,7 +145,7 @@ const ReactKakaoPostcode = forwardRef<ReactKakaoPostcodeHandle, RKakaoPostcodePr
 }, ref) => {
     useScript(KAKAO_API, scriptId, scriptOptions)
 
-    const postcodeArea: any = useRef(null);
+    const postcodeArea = useRef<HTMLDivElement | null>(null);
     const [visible, setVisible] = useState(false)
 
     function createPostcode(currentScroll: number) {
@@ -178,6 +178,8 @@ const ReactKakaoPostcode = forwardRef<ReactKakaoPostcodeHandle, RKakaoPostcodePr
             return
         }
 
+        if(mode === 'embed' && visible) return
+
         const currentScroll = window.scrollY
         const postcode = createPostcode(currentScroll)
 
@@ -192,6 +194,9 @@ const ReactKakaoPostcode = forwardRef<ReactKakaoPostcodeHandle, RKakaoPostcodePr
 
     function closePostcode() {
         setVisible(false)
+        if(mode === 'embed' && postcodeArea.current) {
+            postcodeArea.current.innerHTML = ''
+        }
     }
 
     useImperativeHandle(ref, () => ({

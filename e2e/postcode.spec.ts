@@ -11,7 +11,7 @@ const FAKE_DATA = {
 }
 
 async function setup(page: Page) {
-    await page.route('https://t1.daumcdn.net/**', (route) => route.abort())
+    await page.route('https://t1.kakaocdn.net/**', (route) => route.abort())
     await page.addInitScript({ path: path.join(__dirname, 'fake-daum.js') })
     await page.goto('/index.html')
 }
@@ -53,6 +53,28 @@ test('embed mode: the built-in close button hides the widget manually', async ({
 
     await scenario.getByRole('button', { name: 'close' }).click()
     await expect(area).toHaveCSS('display', 'none')
+})
+
+test('embed mode: reopening (double-click, or close then reopen) does not stack duplicate embeds', async ({ page }) => {
+    const scenario = page.getByTestId('scenario-default')
+    const area = scenario.locator('div[style]')
+    const openButton = scenario.getByRole('button', { name: 'open' })
+
+    // rapid double-open should not create a second Postcode instance/embed
+    await openButton.click()
+    await openButton.click({ force: true })
+
+    const callsAfterDoubleOpen = await page.evaluate(() => (window as any).__postcodeCalls.length)
+    expect(callsAfterDoubleOpen).toBe(1)
+    await expect(scenario.getByTestId('fake-embed-marker')).toHaveCount(1)
+
+    // close, then reopen: the container must be cleared, not appended to
+    await scenario.getByRole('button', { name: 'close' }).click()
+    await expect(area).toHaveCSS('display', 'none')
+
+    await openButton.click()
+    await expect(area).toHaveCSS('display', 'block')
+    await expect(scenario.getByTestId('fake-embed-marker')).toHaveCount(1)
 })
 
 test('popup mode: only renders an open button and calls Postcode#open with openOptions', async ({ page }) => {
