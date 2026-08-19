@@ -1,11 +1,113 @@
 import * as React from 'react';
-import { Options } from './scriptLoader';
+import { Options as ScriptOptions } from './scriptLoader';
 import './styles.scss';
-export declare type RKakaoPostcodeProps = {
-    className?: string;
-    onChange: Function;
-    scriptId: string;
-    options: Options;
+export type PostcodeAddressType = 'R' | 'J';
+export type PostcodeYN = 'Y' | 'N';
+export type PostcodeLanguageType = 'K' | 'E';
+export interface PostcodeCompleteData {
+    zonecode: string;
+    address: string;
+    addressEnglish: string;
+    addressType: PostcodeAddressType;
+    userSelectedType: PostcodeAddressType;
+    noSelected: PostcodeYN;
+    userLanguageType: PostcodeLanguageType;
+    roadAddress: string;
+    roadAddressEnglish: string;
+    jibunAddress: string;
+    jibunAddressEnglish: string;
+    autoRoadAddress: string;
+    autoRoadAddressEnglish: string;
+    autoJibunAddress: string;
+    autoJibunAddressEnglish: string;
+    buildingCode: string;
+    buildingName: string;
+    apartment: PostcodeYN;
+    sido: string;
+    sidoEnglish: string;
+    sigungu: string;
+    sigunguEnglish: string;
+    sigunguCode: string;
+    roadnameCode: string;
+    bcode: string;
+    roadname: string;
+    roadnameEnglish: string;
+    bname: string;
+    bnameEnglish: string;
+    bname1: string;
+    bname1English: string;
+    bname2: string;
+    bname2English: string;
+    hname: string;
+    query: string;
+    /** @deprecated old-style postcode, not updated since 2020-03-09 by Daum/Kakao */
+    postcode: string;
+}
+export type PostcodeSize = {
+    width: number;
+    height: number;
 };
-declare const ReactKakaoPostcode: React.FC<RKakaoPostcodeProps>;
+export type PostcodeCloseState = 'FORCE_CLOSE' | 'COMPLETE_CLOSE';
+export type PostcodeSearchData = {
+    q: string;
+    count: number;
+};
+export type PostcodeTheme = {
+    bgColor?: string;
+    searchBgColor?: string;
+    contentBgColor?: string;
+    pageBgColor?: string;
+    textColor?: string;
+    queryTextColor?: string;
+    postcodeTextColor?: string;
+    emphTextColor?: string;
+    outlineColor?: string;
+};
+export type PostcodeOptions = {
+    width?: number | string;
+    height?: number | string;
+    minWidth?: number;
+    animation?: boolean;
+    focusInput?: boolean;
+    autoMapping?: boolean;
+    autoMappingRoad?: boolean;
+    autoMappingJibun?: boolean;
+    shorthand?: boolean;
+    pleaseReadGuide?: number;
+    pleaseReadGuideTimer?: number;
+    maxSuggestItems?: number;
+    showMoreHName?: boolean;
+    hideMapBtn?: boolean;
+    hideEngBtn?: boolean;
+    alwaysShowEngAddr?: boolean;
+    submitMode?: boolean;
+    useBannerLink?: boolean;
+    theme?: PostcodeTheme;
+};
+export type PostcodeOpenOptions = {
+    q?: string;
+    autoClose?: boolean;
+    left?: number;
+    top?: number;
+    popupTitle?: string;
+    popupKey?: string;
+};
+export type ReactKakaoPostcodeHandle = {
+    open: () => void;
+    close: () => void;
+};
+export type RKakaoPostcodeProps = {
+    className?: string;
+    onChange: (data: PostcodeCompleteData) => void;
+    onClose?: (state: PostcodeCloseState) => void;
+    onResize?: (size: PostcodeSize) => void;
+    onSearch?: (data: PostcodeSearchData) => void;
+    scriptId?: string;
+    scriptOptions?: ScriptOptions;
+    postcodeOptions?: PostcodeOptions;
+    openOptions?: PostcodeOpenOptions;
+    mode?: 'embed' | 'popup';
+    hideDefaultButtons?: boolean;
+};
+declare const ReactKakaoPostcode: React.ForwardRefExoticComponent<RKakaoPostcodeProps & React.RefAttributes<ReactKakaoPostcodeHandle>>;
 export default ReactKakaoPostcode;

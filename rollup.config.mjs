@@ -1,7 +1,8 @@
 import sass from 'rollup-plugin-sass';
 import typescript from 'rollup-plugin-typescript2';
+import { createRequire } from 'module';
 
-import pkg from './package.json';
+const pkg = createRequire(import.meta.url)('./package.json');
 
 // continued
 export default {

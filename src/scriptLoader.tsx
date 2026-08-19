@@ -1,6 +1,6 @@
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 
-const loadScript = (src: string, id: string, callback: Function) => {
+const loadScript = (src: string, id: string, callback?: Function) => {
     const existingScript = document.getElementById(id);
 
     if(!existingScript) {
@@ -8,33 +8,29 @@ const loadScript = (src: string, id: string, callback: Function) => {
 
         script.src = src
         script.id = id
-    
+
         document.body.appendChild(script)
-    
+
         script.onload = () => {
             if(callback) callback()
         }
-
-        if(existingScript && callback) callback()
+    } else if(callback) {
+        callback()
     }
 }
 
 export interface Options {
-    callback: Function,
-    removeScript: Boolean
+    callback?: Function,
+    removeScript: boolean
 }
 
 
 
-const useScript:Function = async (src: string, id: string = 'injected-script', options: Options = {callback: () => null, removeScript: true} ) => {
-    const [isScriptLoaded, setScriptLoaded] = useState(false);
+const useScript = (src: string, id: string = 'injected-script', options: Options = {callback: () => null, removeScript: true} ): void => {
     const {callback, removeScript} = options;
 
-    await useEffect(()=>{
-        if(!isScriptLoaded){
-            loadScript(src, id, callback)
-            setScriptLoaded(true)
-        }
+    useEffect(()=>{
+        loadScript(src, id, callback)
         return () => {
             if(removeScript) {
                 const existingScript = document.getElementById(id);
@@ -42,7 +38,6 @@ const useScript:Function = async (src: string, id: string = 'injected-script', o
             }
         }
     },[src])
-    return true
 }
 
 export default useScript

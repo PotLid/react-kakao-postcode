@@ -1,35 +1,54 @@
 {
   "name": "react-kakao-postcode",
-  "version": "1.0.0",
-  "description": "react-kakao-postcode",
+  "version": "2.0.0",
+  "description": "React component wrapper for the Daum/Kakao Postcode (Korean address search) widget",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": [
+    "*.scss",
+    "*.css"
+  ],
   "dependencies": {},
   "devDependencies": {
-    "@types/react": "^16.9.43",
-    "@types/react-dom": "^16.9.8",
-    "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "rollup": "^2.23.0",
-    "rollup-plugin-sass": "^1.2.2",
-    "rollup-plugin-typescript2": "^0.27.1",
-    "typescript": "^3.9.7"
+    "@playwright/test": "^1.62.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "esbuild": "^0.28.2",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "rollup": "^4.62.4",
+    "rollup-plugin-sass": "^1.15.3",
+    "rollup-plugin-typescript2": "^0.37.0",
+    "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "engines": {
+    "node": ">=14"
   },
   "files": ["dist"],
   "scripts": {
     "build": "rollup -c",
-    "start": "rollup -c -w"
+    "start": "rollup -c -w",
+    "prepublishOnly": "npm run build",
+    "build:e2e": "esbuild e2e/harness.tsx --bundle --outfile=e2e/dist/harness.js --loader:.scss=empty",
+    "test:e2e": "npm run build:e2e && playwright test"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/PotLid/react-kakao-postcode.git"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "kakao",
+    "daum",
+    "postcode",
+    "address",
+    "korea",
+    "zipcode"
+  ],
   "author": "",
   "license": "MIT",
   "bugs": {
